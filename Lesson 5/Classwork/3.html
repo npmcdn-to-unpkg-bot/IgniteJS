@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        /*Задача 3
+
+         Напишите функцию-обертку isValid, которая принимает в качестве аргумента любую функцию и проверяет ее на наличие ошибок.
+         Если ошибок нет, функция, переданная в качестве аргумента, запускается.
+         В противном случае, на экран выводится текст ошибки. */
+        function isValid(func){
+            try{
+                func();
+            }
+            catch(e){
+                alert(e.name);
+                alert(e.message);
+            }
+        }
+        function example(){
+            doc.write("test");
+        }
+        isValid(example);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
