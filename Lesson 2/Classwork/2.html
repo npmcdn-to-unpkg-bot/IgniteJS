@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        /*Напишите функцию, возвращающую количество собственных вызовов. */
+
+        function function_counter() {
+            var count_calls = 0;
+            return function() {
+                return ++count_calls;
+            }
+        }
+        var count = function_counter();
+        document.write(count());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
