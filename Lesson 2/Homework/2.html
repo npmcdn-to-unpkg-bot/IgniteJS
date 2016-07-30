@@ -24,6 +24,13 @@
                 if(typeof obj[property] == "string"){
                     counter++;
                 }
+                else if (Array.isArray(obj[property])) {
+                    for (var i = 0; i <= obj[property].length; i++) {
+                        if(typeof obj[property][i] == "string"){
+                            counter++;
+                        }
+                    }
+                }
             }
             return counter;
         }

@@ -30,9 +30,19 @@
             var shooters = [];
 
             for (var i = 0; i< 10; i++) {
-                var shooter = function() { // функция-стрелок
-                    alert(i); // выводит свой номер
-                };
+                /* Так же можно заменить на такое решение
+                var shooter = function custom_shooter() {
+                 alert( custom_shooter.i );
+                 };
+                 shooter.i = i;
+                */
+                var shooter = (function(i) {
+
+                    return function() {
+                        alert(i);
+                    };
+
+                })(i);
                 shooters.push(shooter);
             }
             return shooters;
