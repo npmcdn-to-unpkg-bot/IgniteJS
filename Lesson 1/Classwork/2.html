@@ -7,11 +7,14 @@
         /*Задача 2.
          Создайте функцию isEmpty(obj), которая возвращает true, если в объекте нет свойств и false – если хоть одно свойство есть.*/
         function isEmpty(obj) {
+            //Проверка на наличие свойст в объекте, если есть хотя бы одно свойство возвращаем false
             for (property in obj) {
                 return false;
             }
+            //Если цикл for не нашел свойтв, то возвращаем return
             return true;
         }
+        //Тестируем функцию isEmpty()
         var arr ={};
         arr.name = "Jon";
         document.write(isEmpty(arr));

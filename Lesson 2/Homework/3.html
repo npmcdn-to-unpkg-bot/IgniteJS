@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        /*Задача 3.
+         Напишите функцию, которая складывает числа при двойном вызове.
+         Например:
+         ```
+         add(3)(4)  // 7
+         ```*/
+        function add(a){
+            return function(b){
+                return a + b;
+            }
+        }
+        document.write(add(3)(4))
+    </script>
+</head>
+<body>
+
+</body>
+</html>
