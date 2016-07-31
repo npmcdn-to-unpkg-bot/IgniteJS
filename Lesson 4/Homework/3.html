@@ -27,12 +27,12 @@
             alert( 'Лог:' + log[i] ); // "Лог:1", затем "Лог:5"
         }
         ```*/
-        function work(a) {
-            return a;
+        function work() {
+
         }
 
         function makeLogging(f, log) {
-                return function(){
+                return function(a){
                     log.push(a);
                 }
         }
