@@ -17,9 +17,32 @@
          smartSum(1, 2)  // 3;
          smartSum(1, 3)(2) // 6;
          smartSum(1, 2)(3, 4, 5)(6)(7, 10) // 38; */
-        var a =[1,2,3];
-        a.slice(1);
-        alert(a);
+         function smartSum(){
+             var result = 0;
+             for(var i = 0; i < arguments.length; i++){
+                 if(isNaN(arguments[i])){
+                     arguments[i] = 0;
+                 }
+                 result += arguments[i];
+             }
+             function add(){
+                 for(var j = 0; j < arguments.length; j++){
+                     if(isNaN(arguments[j])){
+                         arguments[j] = 0;
+                     }
+                     result += arguments[j];
+                 }
+                 return add;
+             }
+             add.toString = function(){
+                 return result;
+             }
+             return add;
+         }
+        document.write(smartSum(3) + "</br>") // 3;
+        document.write(smartSum(1, 2) + "</br>")  // 3;
+        document.write(smartSum(1, 3)(2) + "</br>") // 6;
+        document.write(smartSum(1, 2)(3, 4, 5)(6)(7, 10) + "</br>") // 38;
     </script>
 </head>
 <body>
