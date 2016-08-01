@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+Задача 1
+
+Есть дерево из тегов ul и li.
+
+Напишите код, который для каждого элемента li выведет:
+* Текст непосредственно в нём (без подразделов).
+* Количество вложенных в него элементов li – всех, с учётом вложенных.
+
+Код списка для задачи:
+```
+  <ul>
+    <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        <li>Другие
+          <ul>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Рыбы
+      <ul>
+        <li>Аквариумные
+          <ul>
+            <li>Гуппи</li>
+            <li>Скалярии</li>
+          </ul>
+
+        </li>
+        <li>Морские
+          <ul>
+            <li>Морская форель</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+```
+Напишите код, который для каждого элемента li выведет:
+* Текст непосредственно в нём (без подразделов).
+* Количество вложенных в него элементов li – всех, с учётом вложенных.
+-->
+    <script>
+        window.onload = function(){
+            var li = document.getElementsByTagName("li");
+            for(var i = 0; i < li.length; i++){
+                var text = li[i].textContent;
+                text = text.split(" ")[0];
+                var inner = li[i].querySelectorAll("li");
+                var counter = inner.length;
+                alert("list item №" + (i + 1) + "="+ text + " number of inserted li = " + counter);
+            }
+        }
+    </script>
+    <div id="inner">
+
+    </div>
+    <ul>
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
