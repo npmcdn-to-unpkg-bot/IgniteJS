@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <!--
+     ###Задача 1.
+
+     Код для задачи:
+     ```
+     <body>
+     <div>Пользователи:</div>
+     <ul>
+     <li>user1</li>
+     <li>user2</li>
+     </ul>
+
+     <script>
+     // ... ваш код
+    <script>
+
+    </body>
+
+    ```
+
+    Задание:
+
+    * Напишите код, который получит объект для тега head и запишет его в переменную.
+    * Напишите код, который получит объект для тега ul и запишет его в переменную.
+    * Напишите код, который получит объект для второго тега li и запишет его в переменную.
+
+    -->
+
+    <div>Пользователи:</div>
+    <ul>
+        <li>user1</li>
+        <li>user2</li>
+    </ul>
+
+    <script>
+        var head = document.getElementsByTagName("head");//можно и не писать [0], head  у нас один.
+        var ul = document.getElementsByTagName("ul");//аналогично head.
+        var li = document.getElementsByTagName("li")[1];
+    </script>
+
+</body>
+</html>

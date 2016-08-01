@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+###Задача 2.
+
+Код для  задачи:
+
+```
+<body>
+
+  <div id="widget" data-widget-name="menu">Выберите жанр</div>
+
+  <script>
+    /* ... */
+  </script>
+</body>
+```
+Задание:
+
+* Получите div в переменную.
+* Получите значение атрибута "data-widget-name" в переменную.
+* Выведите его на экран.
+-->
+    <div id="widget" data-widget-name="menu">Выберите жанр</div>
+
+    <script>
+        //var div = document.getElementById("widget");
+        //var div = document.getElementsByTagName("div");
+        var div = document.querySelectorAll("[data-widget-name]")[0];
+        document.write(div.getAttribute("data-widget-name"));
+    </script>
+
+</body>
+</html>
