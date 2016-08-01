@@ -17,7 +17,7 @@
          Если функции передан только один параметр, она должна вернуть его значение. */
         function compose(val, func){
             for(var i = 1; i < arguments.length; i++){
-                 val = arguments[i].call("",val);
+                var val = arguments[i].call("",val);
             }
             return val;
         }

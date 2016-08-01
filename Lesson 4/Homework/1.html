@@ -7,6 +7,26 @@
         /*Задача 1
 
          Представьте, что в JavaScript нет метода call, есть только метод apply. Используя apply, напишите метод call. */
+         function call(){
+             var context = arguments[0];
+             var arr = [];
+             for(var i= 1; i < arguments.length; i++){
+                 arr.push(arguments[i]);
+             }
+             return apply(context,arr);
+         }
+        function sayHi(a) {
+            alert('Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old!');
+            alert(a);
+        };
+
+
+        var user = {
+            name: 'Vasya',
+            age: 25
+        };
+
+        sayHi.call(user,5);
 
     </script>
 </head>
