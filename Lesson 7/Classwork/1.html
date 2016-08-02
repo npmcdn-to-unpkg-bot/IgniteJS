@@ -6,14 +6,6 @@
 </head>
 <body>
 <!--
-
-Elem.insertAdjacentHTML(where, html) - Метод insertAdjacentHTML позволяет вставлять
-произвольный HTML в любое место документа, в том числе и между узлами!
-
-1. `beforeBegin` - перед `elem`.
-2. `afterBegin` - внутрь `elem`, в самое начало.
-3. `beforeEnd` - внутрь `elem`, в конец.
-4. `afterEnd` - после `elem`.
 Задача 1.
 
 Создайте страницу. Разместите на ней произвольное количеством элементов.
@@ -27,11 +19,9 @@ Elem.insertAdjacentHTML(where, html) - Метод insertAdjacentHTML позво�
 <script>
         window.onload = function(){
             var inner = document.getElementById("inner");
-            var container = document.getElementById("container");
             var count = 0;
             function custom(){
                 count ++;
-
                 if(count == 1){
                     var span = document.getElementsByTagName("span")[0];
                     if(span != undefined){
