@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+
+Elem.insertAdjacentHTML(where, html) - Метод insertAdjacentHTML позволяет вставлять
+произвольный HTML в любое место документа, в том числе и между узлами!
+
+1. `beforeBegin` - перед `elem`.
+2. `afterBegin` - внутрь `elem`, в самое начало.
+3. `beforeEnd` - внутрь `elem`, в конец.
+4. `afterEnd` - после `elem`.
+Задача 1.
+
+Создайте страницу. Разместите на ней произвольное количеством элементов.
+Разработайте сценарий, который будет по очереди перемещать span с текстом и интервалом в 400мс:
+1) Перед элементом.
+2) Внутри элемента перед тектом
+3) Внетри элемента после текста.
+4) После элемента.
+
+-->
+<script>
+        window.onload = function(){
+            var inner = document.getElementById("inner");
+            var container = document.getElementById("container");
+            var count = 0;
+            function custom(){
+                count ++;
+
+                if(count == 1){
+                    var span = document.getElementsByTagName("span")[0];
+                    if(span != undefined){
+                        span.parentNode.removeChild(span);
+                    }
+                    inner.insertAdjacentHTML("beforeBegin", "<span>test</span>");
+
+                }
+                else if(count == 2){
+                    var span = document.getElementsByTagName("span")[0];
+                    span.parentNode.removeChild(span);
+                    inner.insertAdjacentHTML("afterBegin", "<span>test</span>");
+                }
+                else if(count == 3){
+                    var span = document.getElementsByTagName("span")[0];
+                    inner.removeChild(span);
+                    inner.insertAdjacentHTML("beforeEnd", "<span>test</span>");
+                }
+                else if(count == 4){
+                    var span = document.getElementsByTagName("span")[0];
+                    inner.removeChild(span);
+                    inner.insertAdjacentHTML("afterEnd", "<span>test</span>");
+                    count = 0;
+                }
+
+            }
+            var start = setInterval(custom,400);
+            start;
+        }
+
+    </script>
+    <div style="background-color: red;width: 200px;height: 200px;" id="container">
+        <div style="background-color: blue;width: 75px;height: 75px;" id="inner">
+            Some text
+        </div>
+    </div>
+</body>
+</html>
