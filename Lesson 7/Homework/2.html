@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+
 <!--Задача 2.
 
 Создайте функцию positionAt(anchor, position, elem), которая позиционирует элемент elem,
@@ -12,6 +13,67 @@
 Используйте её, чтобы сделать функцию showNote(anchor, position, html),
 которая показывает элемент с классом note и текстом html на позиции position рядом с элементом anchor.
 -->
+    <script>
+        window.onload = function(){
+            function positionAt(anchor, position, elem){
+                var anchor_position = anchor.getBoundingClientRect();
+                switch (position){
+                    case "top":
+                        elem.style.left = anchor_position.left + "px";
+                        elem.style.top = anchor_position.top - elem.offsetHeight + "px";
+                        break;
 
+                    case "right":
+                        elem.style.left = anchor_position.left + anchor.offsetWidth + "px";
+                        elem.style.top = anchor_position.top + "px";
+                        break;
+
+                    case "bottom":
+                        elem.style.left = anchor_position.left + "px";
+                        elem.style.top = anchor_position.top + anchor.offsetHeight + "px";
+                        break;
+                    }
+                }
+                function showNote(anchor, position, html) {
+
+                    var div = document.createElement('div');
+                    div.className = "text";
+                    div.innerHTML = html;
+                    document.body.appendChild(div);
+
+                    positionAt(anchor, position, div);
+                }
+
+                // проверка работоспособности
+                var div = document.getElementById("green");
+
+                showNote(div, "top", "text");
+                showNote(div, "right", "text");
+                showNote(div, "bottom", "text");
+            }
+    </script>
+    <style>
+        body{
+            padding: 100px;
+        }
+        .text{
+            position: absolute;
+        }
+        #red{
+            background-color: red;
+            width: 500px;
+            height: 500px;
+            position: absolute;
+        }
+        #green{
+            background-color: green;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <div id="red">
+        <div id ="green"></div>
+    </div>
 </body>
 </html>
