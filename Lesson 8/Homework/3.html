@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input{
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<!--Задача 3.
+
+Создайте страницу-калькулятор.
+Разместите на странице два поля ввода и кнопки для арифметических операций над
+данными введенными в поля ввода. Реализуйте данную страницу двумя способами – с использованием модели DOM Level 0 (через атрибуты) и DOM Level 2.
+-->
+    <script>
+        window.onload = function () {
+            var add = document.getElementById("add");
+            var substract = document.getElementById("substract");
+            var divide = document.getElementById("divide");
+            var multiply = document.getElementById("multiply");
+            var result = document.getElementById("result");
+
+            add.addEventListener("click",function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 + number_2
+                result.value = res;
+            })
+            substract.addEventListener("click",function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 - number_2
+                result.value = res;
+            })
+            divide.addEventListener("click",function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 / number_2
+                result.value = res;
+            })
+            multiply.addEventListener("click",function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 * number_2
+                result.value = res;
+            })
+        }
+    </script>
+    <button id="add">+</button>
+    <button id="substract">-</button>
+    <button id="divide">/</button>
+    <button id="multiply">*</button>
+    <br>
+    <input type="text" id="number_1">
+    <input type="text" id="number_2">
+    <input type="text" id="result">
+</body>
+</html>
