@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Задача 1. 
+Сделайте список, элементы которого можно выделять кликом.
+-->
+<style>
+    .click{
+        background-color: dodgerblue;
+        color: #fff;
+    }
+    li{
+      display: block;
+        width: 60px;
+    }
+</style>
+    <script>
+        window.onload = function () {
+            var list = document.getElementsByTagName("li");
+            var li_1 = document.getElementsByTagName("li")[0];
+            var li_2 = document.getElementsByTagName("li")[1];
+            var li_3 = document.getElementsByTagName("li")[2];
+            li_1.addEventListener("mousedown",function () {
+                for(var i =0; i < list.length; i++){
+                    list[i].className = "";
+                }
+                li_1.className += "click";
+            })
+            li_3.addEventListener("mousedown",function () {
+                for(var i =0; i < list.length; i++){
+                    list[i].className = "";
+                }
+                li_3.className += "click";
+            })
+            li_2.addEventListener("mousedown",function () {
+                for(var i =0; i < list.length; i++){
+                    list[i].className = "";
+                }
+                li_2.className += "click";
+            })
+
+        }
+    </script>
+    <ul>
+        <li>first</li>
+        <li>second</li>
+        <li>third</li>
+    </ul>
+
+</body>
+</html>
