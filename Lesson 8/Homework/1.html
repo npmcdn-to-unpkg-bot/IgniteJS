@@ -25,17 +25,20 @@
         var password = document.getElementById("password");
         var login = document.getElementById("login");
 
-        send.addEventListener("click",function () {
+        send.addEventListener("click",function (e) {
             var result_login = login.value.match(/[0-9]/);
             if(result_login){
+                e.preventDefault();
                 login.style.borderColor = "red";
             }
             var result_password = password.value.match(/[$]/);
             if(result_password){
+                e.preventDefault();
                 password.style.borderColor = "red";
             }
             var  result_tel = tel.value.match(/[^0-9]/);
             if(result_tel){
+                e.preventDefault();
                 tel.style.borderColor = "red";
             }
         } );

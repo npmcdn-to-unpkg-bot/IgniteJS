@@ -24,7 +24,7 @@
             var multiply = document.getElementById("multiply");
             var result = document.getElementById("result");
 
-            add.addEventListener("click",function () {
+            /*add.addEventListener("click",function () {
                 var number_1 = +document.getElementById("number_1").value;
                 var number_2 = +document.getElementById("number_2").value;
                 var res = number_1 + number_2
@@ -47,10 +47,34 @@
                 var number_2 = +document.getElementById("number_2").value;
                 var res = number_1 * number_2
                 result.value = res;
-            })
+            })*/
+            add.onclick = function() {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 + number_2
+                result.value = res;
+            }
+            substract.onclick = function() {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 - number_2
+                result.value = res;
+            }
+            divide.onclick = function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 / number_2
+                result.value = res;
+            }
+            multiply.onclick = function () {
+                var number_1 = +document.getElementById("number_1").value;
+                var number_2 = +document.getElementById("number_2").value;
+                var res = number_1 * number_2
+                result.value = res;
+            }
         }
     </script>
-    <button id="add">+</button>
+    <button id = "add">+</button>
     <button id="substract">-</button>
     <button id="divide">/</button>
     <button id="multiply">*</button>

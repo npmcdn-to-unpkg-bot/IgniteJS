@@ -10,7 +10,38 @@
 в которой находиться сценарий загружающий и отображающий контент двух страниц при нажатии на кнопку.
 Контент должен загружаться асинхронно.
 -->
-
-
+    <style>
+        #output{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var button = document.getElementById("button");
+            var output = document.getElementById("output")
+            button.addEventListener("click", function () {
+                var xhr_1 = new XMLHttpRequest();
+                var xhr_2 = new XMLHttpRequest();
+                xhr_1.open("GET","1_1.html");
+                xhr_1.onreadystatechange = function () {
+                    if (xhr_1.readyState == 4) {
+                        if (xhr_1.status == 200) {
+                            alert(xhr_1.responseText)
+                            output.innerHTML = xhr_1.responseText;
+                        }
+                    }
+                };
+                xhr_1.send();
+                xhr_2.open("GET","1_2.html");
+                xhr_2.send();
+                var content_1 = xhr_1.responseText;
+                document.body.innerHTML = content_1;
+            })
+        }
+    </script>
+    <button id="button">load</button>
+    <div id="output"></div>
 </body>
 </html>
