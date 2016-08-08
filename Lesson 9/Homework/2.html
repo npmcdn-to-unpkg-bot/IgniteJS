@@ -11,44 +11,79 @@
 Если круг будет выйдет за одну из сторон экрана, то он должен, появится с противоположной стороны.
 -->
     <style>
-        #sale{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: red;
-            margin: 25px auto;
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
-        #wraper{
+        #sale{
             width: 100px;
             height: 100px;
-            background-color: black;
+            border-radius: 50%;
+            background-color: red;
             position: absolute;
-            top: 50px;
-            left: 50px;
+            margin: auto;
         }
+
 
     </style>
     <script>
         window.onload = function () {
-            var wraper = document.getElementById("wraper");
-            wraper.addEventListener("mouseover",function (e) {
-                var x = e.clientX;
-                var y = e.clientY;
-                var wraper_x = wraper.style.left;
-                var wraper_y = wraper.style.top;
-                if(x - 100 < 0){
-                    if(y - 100 < 0){
-                        wraper.style.top =y + 10 + "px";
-                        wraper.style.left += 10;
+            var r = 50;
+            var sale = document.getElementById("sale");
+            sale.x = sale.offsetWidth/2 + r;
+            sale.y = sale.offsetHeight/2 + r;
+            sale.style.top = r + "px";
+            sale.style.left = r + "px";
+            function out() {
+                var maxWidth = window.innerWidth - sale.offsetWidth;
+                var maxHeight = window.innerHeight - sale.offsetHeight ;
+                var divideX = 1/maxWidth;
+                if (sale.offsetLeft > maxWidth){
+                    sale.style.left = r + "px";
+                }
+                else {
+                    if(sale.offsetLeft < 0){
+                        sale.style.left = maxWidth - r + "px";
+                    }
+                    else {
+                        sale.style.left = sale.offsetLeft + "px";
                     }
                 }
-            })
-        }
+                if (sale.offsetTop > maxHeight){
+                    sale.style.top = r + "px";
+                }
+                else {
+                    if(sale.offsetTop < 0){
+                        sale.style.top = maxHeight - r + "px";
+                    }
+                    else {
+                        sale.style.top = sale.offsetTop + "px";
+                    }
+                }
+            };
+            function over(e) {
+                var diffX = e.pageX - sale.cX;
+                var diffY = e.pageY - sale.cY;
+                var elipse = Math.pow(diffX, 2)/(sale.x *sale.x) + Math.pow(diffY, 2)/(sale.y * sale.y);
+                if (elipse <= 1) {
+                    var x = sale.x * Math.sqrt(1 - Math.pow(diffY, 2)/(sale.y * sale.y));
+                    var y = sale.y * Math.sqrt(1 - Math.pow(diffX, 2)/(sale.x *sale.x));
+                    sale.style.left = sale.offsetLeft - Math.sign(diffX) * x + diffX + "px";
+                    sale.style.top = sale.offsetTop - Math.sign(diffY) * y + diffY + "px";
+                };
+            };
+            document.body.onmousemove = function (e) {
+                sale.cX = sale.offsetLeft + sale.offsetWidth/2;
+                sale.cY = sale.offsetTop + sale.offsetHeight/2;
+                out();
+                over(e);
+            }
+        };
     </script>
-    <div id="wraper">
         <div id="sale">
         </div>
-    </div>
 
 </body>
 </html>
