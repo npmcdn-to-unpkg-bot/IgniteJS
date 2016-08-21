@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 3
+Реализуйте SPA приложение, в котором пользователю представляется пройти тест из 5 вопросов,
+в каждом вопросе по 4 варианта ответа. Вопросы должны выбираться с помощью radio-button и когда выбран,
+например, вопрос №1, то на странице должны появится варианты ответа только для этого вопроса.
+В конце тестирования отобразите результат теста. При решении данной задачи используйте директиву ng-switch.
+
+-->
+    <style>
+        .answers{
+            display: inline-block;
+            margin: 15px;
+        }
+    </style>
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+                   $scope.questions=[
+                        {question:"Name of Elon Mask rocket is :",correct: 1,
+                        answers: {answer_1: "Falcon 9", answer_2: "Blue Origin", answer_3: "Apollo 13", answer_4: "Discovery"}},
+                        {question: "Founder of Facebook?",correct: 2,
+                        answers:{answer_1: "Bill Gates", answer_2: "Mark Zuckerberg", answer_3: "Nikola Tesla", answer_4: "I am!"}},
+                        {question: "Who is Pikachy?",correct: 3,
+                        answers:{answer_1: "President of Angola", answer_2: "My best friend", answer_3: "Yellow creature", answer_4: "Me, when im getting drunk"}},
+                        {question: "Who is the king of rock-n-roll?",correct: 1,
+                        answers:{answer_1: "Elvis Presley", answer_2: "Pavlo Zibrov", answer_3: "Ivo Bobul", answer_4: "President of Angola"}}
+                    ];
+                    $scope.correct_answers = 0;
+                    $scope.result = [];
+                    $scope.show = function () {
+                        if($scope.result[0] == $scope.questions[0].correct){
+                            $scope.correct_answers++;
+                        }
+                        if($scope.result[1] == $scope.questions[1].correct){
+                            $scope.correct_answers++;
+                        }
+                        if($scope.result[2] == $scope.questions[2].correct){
+                            $scope.correct_answers++;
+                        }
+                        if($scope.result[3] == $scope.questions[3].correct){
+                            $scope.correct_answers++;
+                        }
+
+                        alert("You give " + $scope.correct_answers + " correct answers!")
+                    }
+
+        })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div ng-repeat="question in questions">
+        <input type="radio" name="question" ng-model="$parent.number" value="{{$index}}">
+        <span>{{question.question}}</span>
+
+    </div>
+    <div ng-switch on="number">
+        <div ng-switch-when="0">
+            <div ng-repeat="answer in questions[0].answers" class="answers">
+                <input type="radio" name="answer" value="{{$index + 1}}" ng-model="result[0]"><span>{{answer}}</span>
+            </div>
+        </div>
+        <div ng-switch-when="1">
+            <div ng-repeat="answer in questions[1].answers" class="answers">
+                <input type="radio" name="answer" value="{{$index + 1}}" ng-model="result[1]"><span>{{answer}}</span>
+            </div>
+        </div>
+        <div ng-switch-when="2">
+            <div ng-repeat="answer in questions[2].answers" class="answers">
+                <input type="radio" name="answer" value="{{$index + 1}}" ng-model="result[2]"><span>{{answer}}</span>
+            </div>
+        </div>
+        <div ng-switch-when="3">
+            <div ng-repeat="answer in questions[3].answers" class="answers">
+                <input type="radio" name="answer" value="{{$index + 1}}" ng-model="result[3]"><span>{{answer}}</span>
+            </div>
+        </div>
+    </div>
+<button ng-click="show()">Show result</button>
+</body>
+</html>

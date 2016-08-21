@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 1
+Создайте сервис, который предоставляет стандартные математические операции – сложение, умножение и т.д. Используйте три разных способа для создания сервиса.
+-->
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",["$scope","myFactory",function ($scope,myFactory) {
+                    $scope.add = function () {
+                        $scope.output = myFactory("add",$scope.first,$scope.second);
+                    }
+                    $scope.substract = function () {
+                        $scope.output = myFactory("substract",$scope.first,$scope.second);
+                    }
+                    $scope.multiply = function () {
+                        $scope.output = myFactory("multiply",$scope.first,$scope.second);
+                    }
+                    $scope.divide = function () {
+                        $scope.output = myFactory("divide",$scope.first,$scope.second);
+                    }
+                }])
+                .factory("myFactory",function () {
+                    return function (a,b,c) {
+                        if(a == "add"){
+                            return +c + +b;
+
+                        }
+                        else if(a == "substract"){
+                            return b - c;
+                        }
+                        else if(a == "multiply"){
+                            return b * c;
+                        }
+                        else if(a == "divide"){
+                            return b / c;
+                        }
+                    }
+                })
+
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<input type="text" ng-model="first">
+<input type="text" ng-model="second">
+<button ng-click="add()">+</button>
+<button ng-click="substract()">-</button>
+<button ng-click="multiply()">*</button>
+<button ng-click="divide()">/</button>
+<p>{{output}}</p>
+</body>
+</html>

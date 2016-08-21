@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 2
+Создайте страницу с десятью тегами div с текстом, полем ввода и кнопкой. Добавьте фильтр,
+который при вводе значения в поле и после нажатия на кнопку, покажет пользователю только те блоки,
+текст в которых соответствуют введеному значению. Остальные блоки должны быть скрыты.
+-->
+    <style>
+        div{
+            display: inline-block;
+            font-size: 16px;
+            color: #3c763d;
+            border: 1px solid red;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+                    $scope.first = false;
+                    $scope.second = false;
+                    $scope.third = false;
+                    $scope.fourth = false;
+                    $scope.fifth = false;
+                    $scope.show = function () {
+                        if($scope.paragraph == "first"){
+                            $scope.first = true;
+                            $scope.second = false;
+                            $scope.third = false;
+                            $scope.fourth = false;
+                            $scope.fifth = false;
+                        }
+                        else if($scope.paragraph = "second"){
+                            $scope.second = true;
+                            $scope.first = false;
+                            $scope.third = false;
+                            $scope.fourth = false;
+                            $scope.fifth = false;
+                        }
+                        else if($scope.paragraph = "third"){
+                            $scope.third = true;
+                            $scope.second = false;
+                            $scope.first = false;
+                            $scope.fourth = false;
+                            $scope.fifth = false;
+                        }
+                        else if($scope.paragraph = "fourth"){
+                            $scope.fourth = true;
+                            $scope.second = false;
+                            $scope.third = false;
+                            $scope.first = false;
+                            $scope.fifth = false;
+                        }
+                        else if($scope.paragraph = "fifth"){
+                            $scope.fifth = true;
+                            $scope.second = false;
+                            $scope.third = false;
+                            $scope.fourth = false;
+                            $scope.first = false;
+                        }
+                    }
+                })
+
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div ng-hide="first"><p>first</p></div>
+    <div ng-hide="second"><p>second</p></div>
+    <div ng-hide="third"><p>third</p></div>
+    <div ng-hide="fourth"><p>fourth</p></div>
+    <div ng-hide="fifth"><p>fifth</p></div>
+    <div ng-hide="first"><p>first</p></div>
+    <div ng-hide="second"><p>second</p></div>
+    <div ng-hide="first"><p>first</p></div>
+    <div ng-hide="first"><p>first</p></div>
+    <div ng-hide="third"><p>third</p></div>
+    <br>
+    <br>
+    <input type="text" ng-model="paragraph">
+    <button class="btn btn-info" ng-click="show()">Show</button>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 1
+Создайте три разных CSS класса, которые по-разному будут оформлять блок текста на странице.
+Реализуйте возможность выбирать стиль для оформления страницы с помощью кнопок или checkbox
+-->
+    <style>
+        .bold{
+            font-weight:bold;
+        }
+        .italic{
+            font-style: italic;
+        }
+        .font_size{
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+                    $scope.styleObj = {
+                        bold: false,
+                        italic: false,
+                        font_size: false
+                    }
+                    $scope.bold = function () {
+                        $scope.styleObj.bold = true;
+                        $scope.styleObj.italic = false;
+                        $scope.styleObj.font_size = false;
+                    }
+                    $scope.italic = function () {
+                        $scope.styleObj.italic = true;
+                        $scope.styleObj.bold = false;
+                        $scope.styleObj.font_size = false;
+                    }
+                    $scope.size = function () {
+                        $scope.styleObj.font_size = true;
+                        $scope.styleObj.bold = false;
+                        $scope.styleObj.italic = false;
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <button ng-click="bold()">bold</button>
+    <button ng-click="italic()">italic</button>
+    <button ng-click="size()">size</button>
+    <p ng-class="styleObj">Hello World</p>
+</body>
+</html>

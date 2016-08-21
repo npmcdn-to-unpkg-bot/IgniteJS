@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 2
+Создайте сервис из пердыдущей задачи, используя метод провайдера.
+-->
+    <script>
+        var providerModule = angular.module("providerModule",[])
+                .provider("countClick", function () {
+                    return {
+                        $get: function () {
+                            var count = 1;
+                            return function () {
+                                output = count++;
+                                return output;
+                            }
+                        }
+                    }
+                })
+        angular.module("app",["providerModule"])
+                .controller("myCtrl",["$scope","countClick",function ($scope , countClick) {
+                    $scope.count = function () {
+                        $scope.output = countClick();
+                        console.log($scope.output)
+                    };
+                }])
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<button ng-click="count()">Click me</button>
+</body>
+</html>

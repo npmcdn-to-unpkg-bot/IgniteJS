@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 1
+Создайте приложение-калькулятор. В приложении должно быть два поля ввода и кнопки «+», «-», «*», «/».
+ Реализуйте двунаправленную привязку таким образом, чтобы при нажатии на кнопки результат арифметических операций выводился на странице.
+-->
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+                $scope.add = function () {
+                    $scope.result = +$scope.first + +$scope.second
+                    return $scope.result
+                }
+                    $scope.substract = function () {
+                        $scope.result = +$scope.first - +$scope.second
+                        return $scope.result
+                    }
+                    $scope.multiply = function () {
+                        $scope.result = +$scope.first * +$scope.second
+                        return $scope.result
+                    }
+                    $scope.divide = function () {
+                        $scope.result = +$scope.first / +$scope.second
+                        return $scope.result
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <input type="text" ng-model="first">
+    <input type="text" ng-model="second">
+    <button ng-click="add()">+</button>
+    <button ng-click="substract()">-</button>
+    <button ng-click="multiply()">*</button>
+    <button ng-click="divide()">/</button>
+    <p>{{result}}</p>
+</body>
+</html>

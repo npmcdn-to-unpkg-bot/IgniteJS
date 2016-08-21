@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача3
+Модифицируйте код предыдущей задачи таким образом, чтобы содержимое поля ввода выводилось на страницу сразу(без нажатия на кнопку)
+-->
+    <script>
+        var myApp = angular.module("myApp",[]);
+        myApp.controller("myCtrl", function ($scope) {
+            $scope.update = function () {
+                $scope.message = $scope.text;
+            }
+        })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <input type="text" ng-keyup="update()" ng-model="text">
+    <h1>{{message}}</h1>
+</body>
+</html>

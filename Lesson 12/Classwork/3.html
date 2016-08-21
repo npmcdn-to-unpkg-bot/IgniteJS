@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 3
+Перепишите код предыдущей задачи с использованием директивы ng-include
+-->
+    <script>
+        var data = [
+            { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+            { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+            { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+            { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+        angular.module("app",[]).controller("myCtrl", function ($scope) {
+            $scope.items = data;
+            $scope.checkbox = {name: true, price: true, category: true, count: true, tax: true, expiration: true};
+            $scope.url = {
+                name: "name.html",
+                price: "price.html",
+                category: "category.html",
+                count: "count.html",
+                tax: "tax.html",
+                expiration: "expiration.html"
+            }
+            $scope.paste_url = function (checkbox,link_name) {
+                if(checkbox){
+                    return $scope.url[link_name];
+                }
+            }
+        })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<table class="table-hover table" ng-switch="name_cb">
+    <thead>
+    <th>name</th>
+    <th>price</th>
+    <th>category</th>
+    <th>count</th>
+    <th>tax</th>
+    <th>expiration</th>
+    </thead>
+    <tr ng-repeat="item in items">
+        <td><ng-include src ="paste_url(checkbox.name,'name')"></ng-include></td>
+        <td><ng-include src ="paste_url(checkbox.price,'price')"></ng-include></td>
+        <td><ng-include src ="paste_url(checkbox.category,'category')"></ng-include></td>
+        <td><ng-include src ="paste_url(checkbox.count,'count')"></ng-include></td>
+        <td><ng-include src ="paste_url(checkbox.tax,'tax')"></ng-include></td>
+        <td><ng-include src ="paste_url(checkbox.expiration,'expiration')"></ng-include></td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
+        <td><input type="checkbox" ng-model="checkbox.name"></td>
+        <td><input type="checkbox" ng-model="checkbox.price"></td>
+        <td><input type="checkbox" ng-model="checkbox.category"></td>
+        <td><input type="checkbox" ng-model="checkbox.count"></td>
+        <td><input type="checkbox" ng-model="checkbox.tax"></td>
+        <td><input type="checkbox" ng-model="checkbox.expiration"></td>
+
+    </tr>
+</table>
+</body>
+</html>

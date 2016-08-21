@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 3 
+Создайте форму для регистрации нового пользователя. Форма должна содержать поля: 
+ФИО, email, телефон, пароль, подтверждение пароля. Реализуйте real-time валидацию пользовательского ввода. 
+-->
+    <style>
+        form .ng-valid.ng-dirty {
+            background-color: lightgreen;
+        }
+
+        form .ng-invalid.ng-dirty {
+            background-color: lightcoral;
+        }
+        .valid{
+            background-color: lightgreen !important;
+        }
+        .invalid{
+            background-color: lightcoral !important;
+        }
+    </style>
+
+</head>
+<body ng-controller="myCtrl">
+<form name="myForm">
+    <h3>Name</h3>
+    <input type="text" class="form-control" ng-model="name" ng-pattern="nameRegex">
+    <h3>Email</h3>
+    <input type="text" class="form-control" ng-model="email" ng-pattern="mailRegex">
+    <h3>Telephone</h3>
+    <input type="text" class="form-control" ng-model="telephone" ng-pattern="phoneRegex">
+    <h3>Password</h3>
+    <input type="password" class="form-control" ng-model="password">
+    <h3>Password again</h3>
+    <input type="password" class="form-control" ng-class="styleObj" ng-model="password_again" ng-keyup="check()">
+</form>
+<script>
+    angular.module("app",[])
+            .controller("myCtrl", function ($scope) {
+                $scope.styleObj = {
+                    valid: false,
+                    invalid: false
+                }
+                $scope.nameRegex = /^.{3,20}$/;
+                $scope.mailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]+$/;
+                $scope.phoneRegex = /^[0-9]*$/;
+                $scope.check = function () {
+                    if ($scope.password == $scope.password_again) {
+                        $scope.styleObj.valid = true;
+                        $scope.styleObj.invalid = false;
+                    }
+                    else {
+                        $scope.styleObj.valid = false;
+                        $scope.styleObj.invalid = true;
+                    }
+                }
+
+
+            })
+</script>
+</body>
+</html>
