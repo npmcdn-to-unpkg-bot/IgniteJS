@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet"/>
+    <script src="../Libraries/angular.js"></script>
+    <script src="../Libraries/angular-cookies.js"></script>
+    <!--Задача 3 
+Разработайте сервис, которой можно будет использовать для записи данных в cookie. Продемонстрируйте работу сервиса.
+-->
+    <script>
+        angular.module("app",['ngCookies'])
+                .controller("myCtrl", function ($scope, $cookieStore) {
+                    $scope.output = [];
+                    $scope.save = function () {
+                        $cookieStore.put($scope.id,$scope.name);
+                        var myCookie = $cookieStore.get($scope.id);
+                        $scope.output.push({val: myCookie, id: $scope.id});
+                    }
+
+
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<h3>Id</h3>
+<input type="text" ng-model="id" placeholder="Your Id" class="form-control">
+<h3>Name</h3>
+<input type="text" ng-model="name" placeholder="Your name" class="form-control">
+<br>
+<button class="btn btn-success" ng-click="save()">Save to cookie</button>
+<h2 ng-repeat="item in output">Saved cookie <br> val: &nbsp; {{item.val}}  &nbsp; id: {{item.id}}</h2>
+
+</body>
+</html>

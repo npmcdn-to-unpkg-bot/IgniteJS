@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 2
+Создайте страницу с двумя кнопками Start и Stop. Реализуйте следующее:
+* при нажатии на кнопку start, на страницу начинают выводиться чила в возрастающем порядке с интервалом 1 с.
+* При нажатии на кнопку stop вывод чисел останавливается.
+* При нажатии на кнопку start отсчет начинается всегда с 0.
+-->
+    <script>
+        angular.module("app", [])
+                .controller("myCtrl", function ($scope, $interval) {
+                    var my_interval;
+                    $scope.start = function () {
+                        if(angular.isDefined(my_interval)){
+                            return;
+                        }
+                        $scope.output = 0;
+                        my_interval = $interval(function () {
+                            $scope.output++
+                        },1000);
+                    }
+                    $scope.stop = function () {
+                        if(angular.isDefined(my_interval)){
+                            $interval.cancel(my_interval);
+                            my_interval = undefined;
+                        }
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<button ng-click="start()">Start</button>
+<button ng-click="stop()">Stop</button>
+<p>{{output}}</p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 3
+Разработайте приложение-секундомер. На странице должно быть 3 кнопки:
+* start – начать отсчет
+* stop – остановить отсчет
+* clear – сброс отсчета
+-->
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl", function ($scope, $interval) {
+                    $scope.minutes = "00";
+                    $scope.seconds = "00";
+                    $scope.miliseconds = "00";
+                    var my_interval;
+                    $scope.start = function () {
+                        if(angular.isDefined(my_interval)){
+                            return;
+                        }
+                        my_interval = $interval(function () {
+                            if($scope.miliseconds < 9){
+                                $scope.miliseconds++;
+                                $scope.miliseconds = "0" + $scope.miliseconds;
+                            }
+                            else if($scope.miliseconds == 9){
+                                $scope.miliseconds = "00";
+                                if($scope.seconds < 9) {
+                                    $scope.seconds++;
+                                    $scope.seconds = "0" + $scope.seconds;
+                                }
+                                else if($scope.seconds == 59){
+                                    $scope.seconds = "00";
+                                    if($scope.minutes < 9) {
+                                        $scope.minutes++;
+                                        $scope.minutes = "0" + $scope.minutes;
+                                    }
+                                    else {
+                                        $scope.minutes++;
+                                    }
+                                }
+                                else {
+                                    $scope.seconds++;
+                                }
+                            }
+                        },100)
+                    }
+                    $scope.stop = function () {
+                        if(angular.isDefined(my_interval)){
+                            $interval.cancel(my_interval);
+                            my_interval = undefined;
+                        }
+                    }
+                    $scope.clear = function () {
+                        if(angular.isDefined(my_interval)){
+                            $interval.cancel(my_interval);
+                            my_interval = undefined;
+                        }
+                        $scope.minutes = "00";
+                        $scope.seconds = "00";
+                        $scope.miliseconds = "00";
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+<button ng-click="start()">Start</button>
+<button ng-click="stop()">Stop</button>
+<button ng-click="clear()">Clear</button>
+<p>{{minutes}}:{{seconds}}:{{miliseconds}}</p>
+</body>
+</html>
