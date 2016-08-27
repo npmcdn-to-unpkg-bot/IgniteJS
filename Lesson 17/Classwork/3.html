@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <!--Задача 3
+Модифицируйте код предыдущей задачи для реализации валидации формы.
+-->
+    <style>
+        .form-control {
+            width: 300px;
+            margin: 15px;
+        }
+        form .ng-valid.ng-dirty {
+            background-color: lightgreen;
+        }
+
+        form .ng-invalid.ng-dirty {
+            background-color: lightcoral;
+        }
+
+    </style>
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+                    $scope.styleObj = {
+                        valid: false,
+                        invalid: false
+                    }
+
+                    $scope.mailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]+$/;
+                })
+                .directive("formAdd", function () {
+                    return function (scope,element,attr) {
+                        scope.nameRegex = /A-Za-zА-Яа-я/;
+                        var form = angular.element("<form name='myForm'>");
+                        form.append(angular.element("<input type='text' class='form-control' ng-pattern='nameRegex' ng-model='name' placeholder = 'Username'/>"));
+                        form.append(angular.element("<input type='text' class='form-control' ng-pattern='loginRegex' ng-model='login' placeholder = 'Login'/>"));
+                        form.append(angular.element("<input type='password' class='form-control' ng-pattern='passwordRegex' ng-model='password' placeholder = 'Password'/>"));
+                        form.append(angular.element("<input type='email' class='form-control' ng-pattern='mailRegex' ng-model='mail' placeholder = 'Email'/>"));
+                        element.append(form);
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div form-add></div>
+</body>
+</html>

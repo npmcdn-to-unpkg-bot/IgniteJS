@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <!--Задача 1
+Создайте пользовательскую директиву, которой можно передать массив объектов, а результатом её работы будет сгенерированная таблица.
+Столбцы таблицы, будут соответствовать свойствам объекта. Используйте подход с link function и генерацию элементов с помощью jqLite.
+-->
+    <script>
+        angular.module("app",[])
+                .directive("listAdd",function () {
+                    return{
+                        link: function (scope,elem,attr) {
+                            scope.data = scope[attr["listAdd"]];
+                            var table = angular.element("<table class='table table-bordered'>");
+                            var tr = angular.element("<tr>")
+                            for(key in scope.data[0]){
+                                var th = angular.element("<th>").text(key);
+                                tr.append(th);
+                            }
+                            table.append(tr);
+                            for(var i = 0 ; i < scope.data.length; i++){
+                                var tr = angular.element("<tr>");
+                                for(key in scope.data[i]){
+                                    var td = angular.element("<td>").text(scope.data[i][key]);
+                                    tr.append(td)
+                                }
+                                table.append(tr);
+                            }
+                            elem.append(table);
+                        }
+                    }
+                })
+                .controller("myCtrl",function ($scope) {
+                    $scope.items = [
+                        { name: "B Item", price: 10.9, category: "Category 1", count: 10, tax: 1.12, expiration: 10 },
+                        { name: "A Item", price: 1.1, category: "Category 1", count: 8, tax: 0.55, expiration: 12 },
+                        { name: "D Item", price: 2.6, category: "Category 2", count: 7, tax: 0.22, expiration: 5 },
+                        { name: "C Item", price: 17.5, category: "Category 2", count: 33, tax: 2.77, expiration: 10 }];
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div list-add="items"></div>
+</body>
+</html>

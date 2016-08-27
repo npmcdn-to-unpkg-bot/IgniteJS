@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 2
+Добавьте в код предыдущей задачи еще одну директиву, которая будет выводить значение переменной счетчика в консоль.
+Организуйте код так, чтобы обе директивы использовали один и тот же контроллер. Используйте свойство require.
+-->
+    <script>
+    angular.module("app",[])
+            .directive("counterDir",function () {
+                return {
+                    scope: true,
+                    controller: function ($scope, $interval) {
+                        $scope.counter = 0;
+                        var wrap = angular.element( document.querySelector("#wrap"));
+                        $scope.count = function () {
+                            var my_interval = $interval(function () {
+                                var p = angular.element("<p>").text($scope.counter);
+                                wrap.append(p);
+                                $scope.counter++;
+                            }, 1000)
+                        }
+                    },
+                    template: "<button ng-click='count()'>Go Count</button>"
+                }
+            })
+            .directive("consoleLog",function () {
+                return{
+                    require: "counterDir",
+                    link: function (scope,elem,attr,counterCtrl) {
+                        var console_interval = setInterval(function () {
+                            console.log(scope.counter)
+                        },1000)
+
+                    }
+                }
+            });
+    /*function (scope,elem,attr) {
+     var btn = angular.element("<button ng-click='count()'>").text("Go Count");
+     elem.append(btn);
+     }
+     }
+     })
+     .controller("myCtrl",
+     })*/
+</script>
+</head>
+<body>
+<div counter-dir console-log id="wrap"></div>
+</body>
+</html>

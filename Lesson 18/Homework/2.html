@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 2
+Создайте две директивы. Первая создает список ul с произвольным количеством элементов.
+Вторая директива добавляет четным элементам списка CSS класс ‘red’ со следующим значением:
+```
+.red {
+color: red
+}
+```
+Обе директивы используются в качестве атрибутов и применяются к одному и тому же элементу. При решении задачи используйте приоритет директив.
+-->
+    <style>
+        .red {
+            color: red
+        }
+    </style>
+    <script>
+        angular.module("app",[])
+                .directive("ulCreate", function () {
+                    return{
+                        restrict: "A",
+                        scope: true,
+                        priority: 1,
+                        link: function (scope,elem,attr) {
+                            var ul = angular.element("<ul>");
+                            for(var i = 0; i < scope.data.length; i++){
+                                var li = angular.element("<li>").text(scope.data[i]);
+                                ul.append(li);
+                            }
+                            elem.append(ul);
+                        }
+                    }
+                })
+                .directive("addClass",function () {
+                    return{
+                        restrict: "A",
+                        priority: 2,
+                        scope: true,
+                        link: function (scope,elem,attr) {
+                            var li_items = angular.element(document).find("li");
+                            for (var i = 0; i < li_items.length; i++){
+                                if(i %2 != 0){
+                                    li_items[i].setAttribute("class","red");
+                                }
+                            }
+                        }
+                    }
+                })
+                .controller("myCtrl", function ($scope) {
+                    $scope.data = ["Kiev", "Kharkiv", "Lviv", "Odessa", "Ivano-Frankivs'k"];
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div ul-create add-class></div>
+</body>
+</html>

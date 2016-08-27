@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
+    <!--Задача 2
+Создайте директиву, которая создает форму и добавляет ее на страницу. В форме такие поля:
+Username, login, password, email.
+-->
+    <style>
+        .form-control{
+            width: 300px;
+            margin: 15px;
+        }
+    </style>
+    <script>
+        angular.module("app",[])
+                .controller("myCtrl",function ($scope) {
+
+                })
+                .directive("formAdd", function () {
+                    return function (scope,element,attr) {
+                        var form = angular.element("<form>");
+                        form.append(angular.element("<input type='text' class='form-control' placeholder = 'Username'/>"));
+                        form.append(angular.element("<input type='text' class='form-control' placeholder = 'Login'/>"));
+                        form.append(angular.element("<input type='password' class='form-control' placeholder = 'Password'/>"));
+                        form.append(angular.element("<input type='email' class='form-control' placeholder = 'Email'/>"));
+                        element.append(form);
+                    }
+                })
+    </script>
+</head>
+<body>
+    <div form-add="form"></div>
+</body>
+</html>

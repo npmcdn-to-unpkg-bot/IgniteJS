@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <script src="../Libraries/angular_route.js"></script>
+    <!--Задача 1
+Есть массив items:
+```
+[
+                { name: "Table", price: 44.10 },
+                { name: "Chair", price: 21.20 },
+                { name: "Pillow", price: 12.20 },
+                { name: "Picture", price: 112.70 },
+                { name: "Lamp", price: 28.31 }
+            ];
+```
+Создайте две директивы. Первая создает панель меню с элементами, взятыми из свойства name массива items. Вторая директива реализует следующее:
+* при клике по элементу на панели меню, пользователю показывается соответственный контент, взятый из свойства price массива items.
+Директивы используют общий контроллер.
+-->
+    <style>
+        ul li{
+            display: inline;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        angular.module("app",["ngRoute"])
+                .config(function ($routeProvider) {
+                    $routeProvider
+                            .when("/Table",{
+                                template:"<p>{{items[0].price}}</p>"
+                            })
+                            .when("/Chair",{
+                                template:"<p>{{items[1].price}}</p>"
+                            })
+                            .when("/Pillow",{
+                                template:"<p>{{items[2].price}}</p>"
+                            })
+                            .when("/Picture",{
+                                template:"<p>{{items[3].price}}</p>"
+                            })
+                            .when("/Lamp",{
+                                template:"<p>{{items[4].price}}</p>"
+                            })
+                })
+                .controller("myCtrl",function ($scope) {
+                    $scope.items = [
+                        { name: "Table", price: 44.10 },
+                        { name: "Chair", price: 21.20 },
+                        { name: "Pillow", price: 12.20 },
+                        { name: "Picture", price: 112.70 },
+                        { name: "Lamp", price: 28.31 }
+                    ];
+                })
+                .directive("navCreate", function () {
+                    return{
+                        restrict:"A",
+                        scope: true,
+                        link: function (scope,elem,attr) {
+                            var ul = angular.element("<ul>");
+                            scope.data = scope.items;
+                            for (var i = 0; i < scope.data.length; i++){
+                                var li = angular.element("<li>");
+                                var a = angular.element("<a>").text(scope.data[i].name);
+                                a.attr("href",'#/' + scope.data[i].name);
+                                li.append(a);
+                                ul.append(li);
+                            }
+                            elem.append(ul);
+                        }
+                    }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div nav-create></div>
+    <div ng-view></div>
+</body>
+</html>

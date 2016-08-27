@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Libraries/angular.js"></script>
+    <!--Задача 1
+Создайте пользовательскую директиву, которой можно передать массив, а результатом её работы будет сгенерированный список.
+-->
+    <script>
+        angular.module("app", [])
+                .controller("myCtrl", function ($scope) {
+                    $scope.data = ["Kiev", "Kharkiv", "Lviv", "Odessa", "Ivano-Frankivs'k"];
+                })
+                .directive("itemList", function () {
+                    return function (scope,element,attr) {
+                        var list = scope.data;
+                        var ol = angular.element("<ol>");
+                        for(i = 0;i < list.length; i++ ){
+                            ol.append(angular.element("<li>").text(list[i]));
+                        }
+                        element.append(ol);
+                }
+                })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+    <div item-list="data"></div>
+</body>
+</html>
