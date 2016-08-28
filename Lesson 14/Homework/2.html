@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,10 +11,72 @@
 Для реализации серверной стороны используйте deployed. Используйте для взаимодействия с сервером сервис $http.
 -->
 <script>
+    var data =[
+        {name:"Buy milk",description:"go and buy it!!!",date:"2/18/2015",completed:true},
+        {name:"watch video about AngularJS",description:"watch til the end",date:"2/18/2015",completed:true},
+    ];
+    var myApp = angular.module("myApp",[]);
 
+    myApp.factory("httpCreate", function ($http) {
+        return function (data) {
+            preparedData = JSON.stringify(data);
+            alert(preparedData);
+            $http.post('server.html', preparedData);
+        }
+    });
+
+    var myCtrl = myApp.controller("myCtrl",function ($scope,httpCreate) {
+        $scope.tasks = data;
+        $scope.add = function () {
+           var post_data = {
+               name: $scope.task_name,
+               date: $scope.task_date,
+               description: $scope.task_description,
+               completed: $scope.ask_completed
+           }
+            httpCreate(post_data);
+            $scope.tasks.push(post_data);
+        }
+
+    });
 </script>
 </head>
-<body>
+<body ng-controller="myCtrl">
+<div class="container">
 
+<h3>ToDo List</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Completed</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="task in tasks">
+        <td>{{task.name}}</td>
+        <td>{{task.description}}</td>
+        <td>{{task.date}}</td>
+        <td>{{task.completed}}</td>
+    </tr>
+</table>
+
+<div class="col-md-6">
+    <h3>Name</h3>
+    <input type="text" class="form-control" ng-model="task_name">
+    <h3>Due Date</h3>
+    <input type="text" class="form-control" ng-model="task_date">
+    <h3>Description</h3>
+    <input type="text" class="form-control" ng-model="task_description">
+    <h3>Completed</h3>
+    <input type="checkbox" ng-model="task_completed" >
+    <br/>
+    <button class="btn btn-success" ng-click="add()">Add</button>
+</div>
+
+
+</div>
 </body>
 </html>
