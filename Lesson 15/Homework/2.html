@@ -15,12 +15,12 @@
                     var my_cache;
 
                     $scope.save = function () {
-                        var life = $life_time * 86400000;
+                        var life = $scope.life_time * 86400000;
                         my_cache = $cacheFactory("cache_key");
                         my_cache.put($scope.cache_key,$scope.cache_value);
                         var life_timeout = $timeout(function () {
                             my_cache.remove("cache_key");
-                        },life) 
+                        },life)
                     }
                 })
     </script>
