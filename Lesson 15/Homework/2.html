@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="../Libraries/angular.js"></script>
+    <link href="../Libraries/bootstrap.css" rel="stylesheet">
     <!--Задача 2
 Разработайте сервис, которой можно будет использовать для кэширования данных.
 В кэш можно поместить запись и установить время устаревания этой записи. Продемонстрируйте работу сервиса.
 -->
     <script>
         angular.module("app",[])
-                .controller("myCtrl", function ($scope, $cacheFactory) {
+                .controller("myCtrl", function ($scope, $cacheFactory,$timeout) {
+                    var my_cache;
 
+                    $scope.save = function () {
+                        var life = $life_time * 86400000;
+                        my_cache = $cacheFactory("cache_key");
+                        my_cache.put($scope.cache_key,$scope.cache_value);
+                        var life_timeout = $timeout(function () {
+                            my_cache.remove("cache_key");
+                        },life) 
+                    }
                 })
     </script>
 </head>
-<body>
-
-
+<body ng-controller="myCtrl">
+<input type="text" class="form-control" placeholder="Key" ng-model="cache_key">
+<input type="text" class="form-control" placeholder="Value" ng-model="cache_value">
+<input type="number" class="form-control" ng-model="life_time" placeholder="Enter life time in days">
+<br/>
+<button class="btn btn-info" ng-click="save()">Save</button>
 </body>
 </html>
